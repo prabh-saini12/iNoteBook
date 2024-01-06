@@ -14,12 +14,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    // date: {
+    //     type: Date,
+    //     default: Date.now
+    // }
 }
-    // , { timestamps: true }
+    , { timestamps: true }
 )
 
-export const user = mongoose.model('user', userSchema)
+const user = mongoose.model('user', userSchema)
+
+module.exports = user;

@@ -12,12 +12,14 @@ const NotesSchema = new mongoose.Schema({
     tag: {
         type: String,
     },
-    date: {
-        type: Date,
-        default: Date.now
-    }
+    // date: {
+    //     type: Date,
+    //     default: Date.now
+    // }
 }
-    // , { timestamps: true }
+    , { timestamps: true }
 )
 
-export const notes = mongoose.model('notes', NotesSchema)
+const notes = mongoose.model('notes', NotesSchema)
+
+module.exports = notes;
