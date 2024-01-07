@@ -40,7 +40,7 @@ router.post('/createuser', [
             }
         }
         const authtoken = jwt.sign(data, JWT_SECRET)
-        console.log(authtoken);
+        // console.log(authtoken);
         res.json(authtoken)
     }
     catch (error) {
@@ -49,4 +49,36 @@ router.post('/createuser', [
     }
 });
 
+// Authenticate a user "/api/auth/login"
+router.post('/login', [
+    body('email', 'Enter a valid email').isEmail(),
+    body('password', 'Password can not be blank').exists()
+], async (req, res) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+    const { email, password } = req.body;
+    try {
+        let user =await  User.findOne({ email })
+        if (!user) {
+            return res.status(400).json({ error: "Please try to login with correct credentials" })
+        }
+        const passwordCompare = await bcrypt.compare(password, user.password);
+        if (!passwordCompare) {
+            return res.status(400).json({ error: "Please try to login with correct credentials" })
+        }
+        const data = {
+            user: {
+                id: user.id
+            }
+        }
+        const authtoken = jwt.sign(data, JWT_SECRET)
+        res.json(authtoken)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("Internal server Error ")
+    }
+})
 module.exports = router;
