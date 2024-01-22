@@ -1,44 +1,52 @@
-import React, { useState, useEffect } from 'react'
-const host = "http://localhost:5000";
+import React, { useState, useEffect } from 'react';
+import '../Styles/UserDetail.css';
+
+const host = process.env.REACT_APP_HOST;
 
 function UserDetails(props) {
   const [data, setData] = useState({});
+
   const getDetails = async () => {
     props.updateLoading(10);
     try {
       props.updateLoading(20);
-      // let response = await fetch(`${process.env.REACT_APP_HOST}/api/auth/getuser`, {
-      let response = await fetch(`${host}/api/auth/getuser`, {
+      const response = await fetch(`${host}/api/auth/getuser`, {
         method: "POST",
         headers: { 'auth-token': localStorage.getItem('auth-token') }
-      })
-      props.updateLoading(50);
-      response = await response.json();
-      props.updateLoading(80);
-      setData({
-        name: response.name,
-        email: response.email,
-        date: response.date
       });
+      props.updateLoading(50);
+      const userData = await response.json();
+      props.updateLoading(80);
+
+      setData({
+        name: userData.name,
+        email: userData.email,
+        signupDate: new Date(userData.createdAt).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+      });
+
       props.updateLoading(100);
     } catch (err) {
       console.log(err.message);
+      props.updateLoading(100);
     }
-    props.updateLoading(100);
-  }
+  };
+
   useEffect(() => {
     getDetails();
-    // eslint-disable-next-line
   }, []);
+
   return (
-    <div className="container my-3">
-      <h2>My Details</h2>
-      <hr />
-      <p className='fs-4 mt-5'>My Name &nbsp; : {data.name ? data.name : "Loading"}</p>
-      <p className='fs-4'>My Email &nbsp;&nbsp; : {data.email ? data.email : "Loading"}</p>
-      <p className='fs-4'>Signup On : {data.date ? new Date(data.date).toString().slice(0, 25).concat("IST") : "Loading"}</p>
+    <div className="user-details-wrapper">
+      <div className="user-details-card">
+        <h2>My Details</h2>
+        <div className="user-details-info">
+          <h2><span>Name:</span>{data.name ? data.name : "Loading"}</h2>
+          <p><span>Email:</span> {data.email ? data.email : "Loading"}</p>
+          <p><span>Signup On:</span> {data.signupDate ? data.signupDate : "Loading"}</p>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default UserDetails
+export default UserDetails;
