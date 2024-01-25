@@ -11,18 +11,22 @@ function GetNote() {
     const ref = useRef();
 
     useEffect(() => {
-        if (!localStorage.getItem('auth-token')) {
-            sendAlert("Please Login/Signup First", "danger");
-            navigate('/login');
-        } else {
-            try {
-                getNotes();
-            } catch (err) {
-                sendAlert("Something Went Wrong, Please Login Again", "danger");
+        const fetchData = async () => {
+            if (!localStorage.getItem('auth-token')) {
+                sendAlert("Please Login/Signup First", "danger");
                 navigate('/login');
+            } else {
+                try {
+                    await getNotes();
+                } catch (err) {
+                    sendAlert("Something Went Wrong, Please Login Again", "danger");
+                    navigate('/login');
+                }
             }
-        }
-    }, []);
+        };
+
+        fetchData();
+    }, [getNotes, navigate, sendAlert]);
 
     const updateNote = (note) => {
         ref.current.click();

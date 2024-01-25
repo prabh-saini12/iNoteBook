@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import '../Styles/UserDetail.css';
 
 const host = process.env.REACT_APP_HOST;
 
-function UserDetails(props) {
+function UserDetails({ updateLoading }) {
   const [data, setData] = useState({});
 
-  const getDetails = async () => {
-    props.updateLoading(10);
+  const getDetails = useCallback(async () => {
+    updateLoading(10);
     try {
-      props.updateLoading(20);
+      updateLoading(20);
       const response = await fetch(`${host}/api/auth/getuser`, {
         method: "POST",
         headers: { 'auth-token': localStorage.getItem('auth-token') }
       });
-      props.updateLoading(50);
+      updateLoading(50);
       const userData = await response.json();
-      props.updateLoading(80);
+      updateLoading(80);
 
       setData({
         name: userData.name,
@@ -24,16 +24,16 @@ function UserDetails(props) {
         signupDate: new Date(userData.createdAt).toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
       });
 
-      props.updateLoading(100);
+      updateLoading(100);
     } catch (err) {
       console.log(err.message);
-      props.updateLoading(100);
+      updateLoading(100);
     }
-  };
+  }, [updateLoading]);
 
   useEffect(() => {
     getDetails();
-  }, []);
+  }, [getDetails]);
 
   return (
     <div className="user-details-wrapper">
