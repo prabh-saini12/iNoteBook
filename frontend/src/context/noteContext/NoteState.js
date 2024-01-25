@@ -40,11 +40,11 @@ const NoteState = (props) => {
   const loginUser = async (email, password) => {
     try {
       const response = await apiCall("POST", "/api/auth/login", { email, password });
-
-      if (Array.isArray(response) && response.length > 0 && !response[0].authtoken) {
+      if (!response.authtoken) {
         sendAlert(response[0].msg, 'danger');
       } else {
-        localStorage.setItem('auth-token', response[0].authtoken);
+        localStorage.setItem('auth-token', response.authtoken);
+        // console.log(localStorage.getItem('auth-token'));
         setLoggedIn(true);
         sendAlert('Login Successfully', 'success');
       }
