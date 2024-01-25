@@ -1,0 +1,39 @@
+.custom-alert {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    align-self: center;
+    z-index: 1;
+    top: 10px;
+    left: 0;
+    right: 0;
+  }
+  
+  .custom-alert-danger {
+    background-color: #ff3333;
+    color: #fff;
+  }
+  
+  .custom-btn {
+    height: 30px;
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2px;
+  }
+  
+  .custom-yes {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+  }
+  
+  .custom-no {
+    background-color: #dc3545;
+    color: #fff;
+    border: 1px solid #dc3545;
+  }
+  

@@ -1,0 +1,58 @@
+.user-details-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3% 0;
+    height: 90vh;
+  }
+  
+  .user-details-card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 40px;
+    width: 80%;
+    box-shadow: 0 2px 20px -5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  
+  .user-details-info {
+    margin-top: 20px;
+  }
+  
+  .user-details-info h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+  }
+  
+  .user-details-info p {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+  
+  .user-details-info p span {
+    font-weight: 700;
+    margin-right: 10px;
+  }
+  
+  @media only screen and (min-width: 768px) {
+    .user-details-card {
+      width: 60%;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .user-details-card {
+      width: 90%;
+    }
+  
+    .user-details-info h2 {
+      font-size: 28px;
+    }
+  
+    .user-details-info p {
+      font-size: 18px;
+    }
+  }
+  

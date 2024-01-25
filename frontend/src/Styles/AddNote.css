@@ -1,0 +1,81 @@
+/* AddNote Component Styles */
+.addnote-container {
+  max-height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.addnote-header {
+  text-align: center;
+  font-family: "Inter", sans-serif;
+  padding: 1rem 0;
+  margin: 0;
+  font-size: 2rem;
+}
+
+.addnote-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  min-width: 70%;
+}
+
+.addnote-input {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  font-size: 1.3rem;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  background-color: #f7f7f7;
+  transition: box-shadow 0.2s ease-in;
+  border-radius: 15px;
+}
+
+.addnote-input:focus {
+  box-shadow: 0px 0px 10px 0px rgba(52, 168, 83, 0.7);
+  outline: none;
+}
+
+.addnote-input:hover::-webkit-input-placeholder,
+.addnote-input:focus::-webkit-input-placeholder {
+  opacity: 0;
+}
+
+.addnote-label {
+  align-self: start;
+  padding-left: 1.5rem;
+  padding-bottom: 0.5rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.addnote-button {
+  border-radius: 25px;
+  width: 80%;
+  max-width: 300px;
+  height: 45px;
+  font-size: 1.3rem;
+  color: white;
+  font-weight: 700;
+  background: seagreen;
+  cursor: pointer;
+  transition: opacity 0.25s ease-out;
+}
+
+.addnote-button:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 500px) {
+  .addnote-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+    max-width: 100%;
+  }
+}

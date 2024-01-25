@@ -4,10 +4,14 @@ import noteContext from "./noteContext";
 import { useNavigate } from "react-router-dom";
 
 const NoteState = (props) => {
-  const {sendAlert}=props;
-  // const host = process.env.REACT_APP_HOST;
-  const host = "http://localhost:5000";
-  const apiCall = async (method, url, body) => {
+  const { sendAlert, updateLoading } = props;
+  const host = process.env.REACT_APP_HOST
+
+  	//useNavigate To Navigate into different page
+	const navigate = useNavigate();
+
+
+  const apiCall = async (method, url, bodyData) => {
     let response;
     try {
       if (method === "GET" || method === "DELETE") {
@@ -37,6 +41,31 @@ const NoteState = (props) => {
   }
 
   const [notes, setNotes] = useState([]);
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const loginUser = async (email, password) => {
+    try {
+      const response = await apiCall("POST", "/api/auth/login", { email, password });
+      if (!response.authtoken) {
+        sendAlert(response[0].msg, 'danger');
+      } else {
+        localStorage.setItem('auth-token', response.authtoken);
+        console.log(localStorage.getItem('auth-token'));
+        setLoggedIn(true);
+        sendAlert('Login Successfully', 'success');
+        navigate('/home')
+      }
+    } catch (err) {
+      sendAlert('Something Went Wrong!!!', 'danger');
+    }
+  };
+
+  const logoutUser = () => {
+    localStorage.removeItem('auth-token');
+    setLoggedIn(false);
+    sendAlert('Logged out Successfully', 'success');
+  };
+
 
   //Add A Note
   const addNote = async (title, description, tag) => {
@@ -171,3 +200,4 @@ const NoteState = (props) => {
 };
 
 export default NoteState;
+export { noteContext };

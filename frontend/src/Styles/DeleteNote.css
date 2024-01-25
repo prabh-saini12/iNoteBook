@@ -1,0 +1,79 @@
+/* styles.css */
+
+/* Modal Styles */
+.delete-note-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    width: 400px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.delete-note-modal.show {
+    display: block;
+}
+
+/* Modal Header Styles */
+.delete-note-modal .modal-header {
+    position: relative;
+}
+
+.delete-note-modal .modal-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.delete-note-modal .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Modal Body Styles */
+.delete-note-modal .modal-body {
+    margin-bottom: 20px;
+}
+
+.delete-note-modal p {
+    font-size: 1rem;
+}
+
+/* Modal Footer Styles */
+.delete-note-modal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.delete-note-modal .btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 1rem;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.delete-note-modal .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Hide the button visually, but keep the functionality */
+.delete-note-modal .modal-footer button {
+    display: none;
+}
