@@ -1,15 +1,9 @@
-
 import { useState } from "react";
 import noteContext from "./noteContext";
-import { useNavigate } from "react-router-dom";
 
 const NoteState = (props) => {
   const { sendAlert, updateLoading } = props;
-  const host = process.env.REACT_APP_HOST
-
-  	//useNavigate To Navigate into different page
-	const navigate = useNavigate();
-
+  const host = process.env.REACT_APP_HOST;
 
   const apiCall = async (method, url, bodyData) => {
     let response;
@@ -53,7 +47,6 @@ const NoteState = (props) => {
         console.log(localStorage.getItem('auth-token'));
         setLoggedIn(true);
         sendAlert('Login Successfully', 'success');
-        navigate('/home')
       }
     } catch (err) {
       sendAlert('Something Went Wrong!!!', 'danger');
