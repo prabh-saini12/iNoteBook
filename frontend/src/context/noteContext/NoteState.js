@@ -44,7 +44,7 @@ const NoteState = (props) => {
         sendAlert(response[0].msg, 'danger');
       } else {
         localStorage.setItem('auth-token', response.authtoken);
-        console.log(localStorage.getItem('auth-token'));
+        // console.log(localStorage.getItem('auth-token'));
         setLoggedIn(true);
         sendAlert('Login Successfully', 'success');
       }
@@ -75,7 +75,7 @@ const NoteState = (props) => {
         props.updateLoading(40);
         const response = await apiCall("POST", "/api/notes/addnotes", { title, description, tag });
         props.updateLoading(60);
-        console.log(response);
+        // console.log(response);
         if (!response.user)
           sendAlert(response, 'secondary');
         else {
